@@ -33,7 +33,10 @@ function dataToDom(data) {
    place.textContent = `Weather in => ${data.name}`;
    temp.textContent = `${Math.round(data.main.temp)} °C`;
    icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
-   desc.textContent = data.weather[0].description;
+   desc.textContent = data.weather[0].description.replace(
+      /(\w{3})/g,
+      (letter) => letter.toLowerCase()
+   );
    humid.textContent = `Humidity: ${data.main.humidity}%`;
    wind.textContent = `Wind speed: ${Math.round(data.wind.speed)} km/h`;
 }
