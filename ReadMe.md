@@ -20,5 +20,5 @@
 ### (sunny,cloudy,rainy,snowy) weather status until further updates required.
 
 
-## Future updates:
+## Future updates :
 	* Users can choose API or even pay for one through a secured payment page.
