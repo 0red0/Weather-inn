@@ -40,10 +40,10 @@ async function cityName(lati, long) {
 async function fetching(paraCity) {
    try {
       // if (input.value == "" || input.value == null) return;
-      const weather = await fetch(
-         `http://api.openweathermap.org/data/2.5/weather?q=${paraCity}&units=metric&APPID=9b991c6b7b7ad09f573df741fc68e9a2`,
-         { mode: "cors" }
-      );
+      // const proxy = "https://cors-anywhere.herokuapp.com/";
+      const api = `https://api.openweathermap.org/data/2.5/weather?q=${paraCity}&units=metric&APPID=9b991c6b7b7ad09f573df741fc68e9a2`;
+
+      const weather = await fetch(api);
       let data = await weather.json();
       console.log(data);
       dataToDom(data);
