@@ -74,16 +74,6 @@ h1.temp {
    margin-bottom: 0.4em;
 }
 
-.flex {
-   display: flex;
-   align-items: center;
-}
-
-.description {
-   text-transform: capitalize;
-   margin-left: 8px;
-}
-
 .weather.loading {
    visibility: hidden;
    max-height: 20px;
@@ -97,4 +87,19 @@ h1.temp {
    position: absolute;
    top: 0;
    left: 20px;
+}
+
+.holder {
+   display: flex;
+   justify-content: space-between;
+   align-content: flex-end;
+   margin-right: 40px;
+}
+.flex {
+   text-align: center;
+}
+.flex > img {
+   width: 85px;
+   height: 85px;
+   margin: -15px;
 }

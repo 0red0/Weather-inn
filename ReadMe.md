@@ -22,3 +22,5 @@
 
 ## Future updates :
 	* Users can choose API or even pay for one through a secured payment page.
+	
+## [Demo](https://0red0.github.io/Weather-inn/)

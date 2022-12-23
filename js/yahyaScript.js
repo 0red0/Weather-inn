@@ -1,6 +1,7 @@
 const searchBtn = document.querySelector("button");
-const city = document.querySelector(".search-bar");
+const input = document.querySelector(".search-bar");
 const place = document.querySelector(".city");
+const myCountry = document.querySelector(".country");
 const temp = document.querySelector(".temp");
 const icon = document.querySelector(".icon");
 const desc = document.querySelector(".description");
@@ -10,11 +11,38 @@ const display = document.querySelector(".loading");
 const card = document.querySelector(".card");
 const myErr = document.querySelector(".err");
 
-async function fetching() {
+let long;
+let lati;
+
+window.addEventListener("load", () => {
+   if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+         long = position.coords.longitude;
+         lati = position.coords.latitude;
+         // console.log(long, lati);
+         cityName(lati, long);
+      });
+   }
+});
+
+async function cityName(lati, long) {
+   const myLocation = await fetch(
+      `https://api.openweathermap.org/geo/1.0/reverse?lat=${lati}&lon=${long}&appid=9b991c6b7b7ad09f573df741fc68e9a2`,
+      { mode: "cors" }
+   )
+      .then((res) => res.json())
+      .then((cName) => {
+         fetching(cName[0].name);
+         myCountry.textContent = cName[0].country;
+      });
+}
+
+async function fetching(paraCity) {
    try {
-      // if (city.value == "" || city.value == null) return;
+      // if (input.value == "" || input.value == null) return;
       const weather = await fetch(
-         `http://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=metric&APPID=9b991c6b7b7ad09f573df741fc68e9a2`
+         `http://api.openweathermap.org/data/2.5/weather?q=${paraCity}&units=metric&APPID=9b991c6b7b7ad09f573df741fc68e9a2`,
+         { mode: "cors" }
       );
       let data = await weather.json();
       console.log(data);
@@ -27,13 +55,17 @@ async function fetching() {
    }
 }
 
-searchBtn.addEventListener("click", fetching);
+searchBtn.addEventListener("click", () => {
+   fetching(input.value);
+   myCountry.style.display = "none";
+});
 window.addEventListener("keyup", (e) => {
-   if (e.key == "Enter") fetching();
+   if (e.key == "Enter") fetching(input.value);
+   myCountry.style.display = "none";
 });
 
 function dataToDom(data) {
-   place.textContent = `Weather in => ${data.name}`;
+   place.textContent = `Weather in => ${data.name},`;
    temp.textContent = `${Math.round(data.main.temp)} °C`;
    icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
    desc.textContent = data.weather[0].description;
@@ -45,5 +77,5 @@ function dataToDom(data) {
 function showDom(data) {
    card.style.backgroundColor = `#003${data.weather[0].icon}cc`;
    display.classList.remove("loading");
-   city.value = "";
+   input.value = "";
 }

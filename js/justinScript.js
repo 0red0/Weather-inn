@@ -13,7 +13,8 @@ async function fetching() {
    try {
       if (city.value == "" || city.value == null) return;
       const weather = await fetch(
-         `http://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=metric&APPID=9b991c6b7b7ad09f573df741fc68e9a2`
+         `http://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=metric&APPID=9b991c6b7b7ad09f573df741fc68e9a2`,
+         { mode: "cors" }
       );
       let data = await weather.json();
       console.log(data);
