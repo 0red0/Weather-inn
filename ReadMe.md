@@ -14,7 +14,7 @@
 	- Comparison of all dates searched if they have same day or month or year.
 ### Features like signing up users.
 ### User's guide / manual.
-### Temp unit c/F.
+### Temp unit C/F.
 ### contact us in the navbar.
 ### +Notes, users can use (sunny,cloudy,rainy,snowy) emojis instead of writing.
 ### (sunny,cloudy,rainy,snowy) weather status until further updates required.
